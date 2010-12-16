@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset=utf-8 />
+<title>Tree simple</title>
+<style>
+body {
+  margin: 0;
+}
+canvas {
+  display: block;
+}
+</style>
+</head>
+<body>
+<canvas></canvas>
+<script src="vector.js"></script>
+<script src="tree.js"></script>
+<script src="util.js"></script>
+<script>
+var canvas = document.querySelector('canvas'),
+    ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+util = new CanvasUtil(ctx, {
+  // grid: [10, 10],
+  cursor: true
+});
+
+var tree = new Tree(400, 450, {
+  growDelay: Math.random() * 1000,
+  base: 100
+});
+
+ctx.fillStyle = 'rgba(0,0,0,.5)';
+
+// bendy
+tree.add(-20, -20, true);
+tree.add(-20, 0, true);
+tree.add(-20, -20, true);
+tree.add(40, -40, true);
+
+// straight up
+// tree.add(0, -25, true);
+// tree.add(0, -10, true);
+// tree.add(0, -25, true);
+// tree.add(0, -5, true);
+
+tree.vectors.forEach(function (v) {
+  v.mult(5);
+});
+
+// tree.draw(.5);
+// tree.draw(1);
+
+// tree.x += 200;
+// ctx.strokeStyle = '#0f0';
+// tree.base = 1;
+// tree.draw(1);
+
+// tree.x += 200;
+// tree.draw(0.5);
+// 
+// tree.x += 200;
+// 
+var i = 0;
+var t = setInterval(function () {
+  i+= 0.01;
+  tree.draw(1-(1-i)*(1-i));
+  // tree.draw(i);
+  // if (1-(1-i)*(1-i) >= 1) {
+  if (i >= 1) {
+    clearInterval(t);
+  }
+}, 50);
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
